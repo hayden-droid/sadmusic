@@ -1,6 +1,188 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+    body{
+  background: #FBBEC0;
+}
+
+.toggle {
+  cursor: pointer;
+  width: 250px;
+  margin: 20% auto;
+  display: block;
+  
+  input {
+    display: none;
+  }
+  
+  input:checked + .toggle-wrapper {
+    .lever{
+      transform: translateX(148%);
+      background: #645D93;
+      animation-name: move-lever;
+      animation-duration: 0.25s;
+      animation-timing-function: ease-in;
+    }
+    
+    .face-eyes {
+      &:before,
+      &:after {
+        animation-name: move-eyes;
+        animation-duration: 0.5s;
+        animation-timing-function: ease;
+        left: 70px;
+      }
+    }
+    
+    .face-smile {
+      animation-name: move-mouth;
+      animation-duration: 0.5s;
+      animation-fill-mode: forward;
+      left: 5px;
+    }
+  }
+}
+
+.toggle-wrapper {
+  background:white;
+  width: 250px;
+  border-radius: 100px;
+  padding: 10px;
+  display: block;
+  position: relative;
+}
+
+.lever {
+  width: 100px;
+  height: 100px;
+  background: #FBBEC0;
+  border-radius: 1000px;
+  transition: all 0.5s;
+}
+
+.face {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .face-eyes {
+    &:before,
+    &:after {
+      animation-name: move-eyes-back;
+      animation-duration: 0.5s;
+      content: " ";
+      width: 10px;
+      height: 10px;
+      background: white;
+      display: block;
+      top: 60px;
+      left: 20px;
+      position: absolute;
+    }
+    
+    &:after {
+      top: 30px;
+    }
+  }
+  
+  .face-smile { 
+    animation-name: move-mouth-back;
+    animation-duration: 0.5s;
+    width: 45%;
+    height: 20%;
+    transform: rotate(-90deg);
+    background-color: transparent;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border: 6px solid white;
+    border-bottom: 0;
+    position: absolute;
+    left: 35px;
+    top: 36px;
+  }
+}
+
+@keyframes move-lever {
+  0% {
+    transform: translateX(0%);
+    
+  }
+  50% {
+    transform: translateX(148%);
+    
+  }
+  75% {
+    transform: translateX(118%);
+    
+  }
+  100% {
+    transform: translateX(148%);
+  }
+}
+
+@keyframes move-eyes {
+  from {
+    left: 20px;
+  }
+  to {
+    left: 70px;
+  }
+}
+
+@keyframes move-eyes-back {
+  to {
+    left: 20px;
+  }
+  from {
+    left: 70px;
+  }
+}
+
+@keyframes move-mouth {
+  0% {
+    opacity: 1.0;
+    left: 35px
+  }
+  
+  30% {
+    opacity: 0;
+    left: 30px
+  }
+  
+  46% {
+    opacity: 0;
+    left: -15px;
+  }
+  
+  100% {
+    opacity: 1;
+    left: 5px;
+  }
+}
+
+@keyframes move-mouth-back {
+  100% {
+    opacity: 1.0;
+    left: 35px
+  }
+  
+  46% {
+    opacity: 0;
+    left: 55px
+  }
+  
+  30% {
+    opacity: 0;
+    left: -15px;
+  }
+  
+  0% {
+    opacity: 1;
+    left: 0px;
+  }
+}
+    </style>
   <link rel="shortcut icon" href="http://hayden-droid.github.io/sadmusic/download.ico" />
   <meta charset="UTF-8">
   <meta name="description" content="Listen To Depressing Music Free Of Charge! Website For Depressed People Because I Know There Are a Lot Out There That Hide It.">
@@ -16,7 +198,18 @@
 <iframe src="https://open.spotify.com/embed/playlist/05npi9zc62G56cCLaLMvLL" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 <iframe src="https://open.spotify.com/embed/playlist/70VaOHyjpsWcmA4gxosExZ" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 <iframe src="https://open.spotify.com/embed/playlist/0bbdkT0aBfwhg6zyLW3Yob" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
- </div>
+ <label class="toggle">
+  <input name="toggle-smile" type="checkbox">
+  <div class="toggle-wrapper active">
+    <div class="lever">
+      <div class="face">
+        <div class="face-eyes"></div>
+        <div class="face-smile"></div>
+      </div>
+    </div>
+  </div>
+</label>
+  </div>
 
 <footer>
 <p>Made by Hayden Drysdale</p>
